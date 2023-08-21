@@ -17,7 +17,7 @@ To identify cell subpopulations with pathway heterogeneity, scPathClus requires 
 # Examples
 This sample data is a random subset (5,000 cells) from PDAC_CRA001160 dataset. 
 ## Load dependencies
-```
+```ruby
 from keras.layers import Input, Dense
 from keras.models import Model
 from keras.optimizers import Adam
