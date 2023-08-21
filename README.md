@@ -67,17 +67,19 @@ class Autoencoder_model:
 os.chdir('/working_path')
 os.getcwd() # Check the working path
 
-pathway_score = pd.read_csv("sc_PathwayScore_example.csv",index_col = 0) 
+pathway_score = pd.read_csv("sc_PathwayScore_example.csv",index_col = 0)
+- pathway_score：
+
+  |                       | GOBP_MITOCHONDRIAL_GENOME_MAINTENANCE_UCell | GOBP_REPRODUCTION_UCell |
+  | --------------------- | ------------- |--------------------- |
+  | T12_ACACCCTTCCGTCATC  | 0.0911209677419355 | 0.412496516257465 |
+  | T11_GATCAGTGTGCAACTT  | 0.0631693548387097  | 0.432461181154612 |
+
 pathway_score.shape  
 sample_names = pathway_score.index
 pathway_score = pathway_score.astype('float32') 
 pathway_score = minmax_scale(pathway_score) 
 ```
-- pathway_score：
-  |                       | GOBP_MITOCHONDRIAL_GENOME_MAINTENANCE_UCell | GOBP_REPRODUCTION_UCell |
-  | --------------------- | ------------- |--------------------- |
-  | T12_ACACCCTTCCGTCATC  | 0.0911209677419355 | 0.412496516257465 |
-  | T11_GATCAGTGTGCAACTT  | 0.0631693548387097  | 0.432461181154612 |
 - Converting the data type from  float 64 to float 32 helps speed up the computation.
 - Before performing the dimension reduction step, data should be normalized to 0-1. 
 ### Instantiate an autoencoder model
@@ -124,7 +126,7 @@ encoded_feature = pd.DataFrame(data=encoded_path, columns=col_names, index= samp
 encoded_feature.to_csv("encoded_feature.csv")
 ```
   |                       | Feature1 | Feature2 |Feature3 | Feature4 |Feature5 |
-  | --------------------- | ------------- |--------------------- |------------- |--------------------- |
+  | --------------------- | ------------- |----------------- |------------- |------------- |--------------- |
   | T12_ACACCCTTCCGTCATC  | 0 | 0 | 0 | 10.317576 | 0.6895857 |
   | T11_GATCAGTGTGCAACTT  | 0 | 0 | 0 | 0.09860481 | 0.90391874 |
   | T19_ACGATACGTTGTCGCG  | 0 | 0 | 0 | 8.977797 | 1.0264478 |
@@ -148,22 +150,22 @@ sc.tl.tsne(adata,use_rep = "X_pathway")
 sc.tl.leiden(adata,resolution=1)
 ```
 ```python
-### plot the clustering result
+## plot the clustering result
 sc.pl.tsne(adata, color=['leiden'],legend_loc='on data')
 ```
 ![Figure_2](https://github.com/WangX-Lab/scPathClus/assets/54932820/7b9e9f98-dfde-4f28-880d-344122cab6b9)
 ```python
-### map the patient information to the tSNE plot
+## map the patient information to the tSNE plot
 sc.pl.tsne(adata, color=['Patient'])
 ```
 ![Figure_4](https://github.com/WangX-Lab/scPathClus/assets/54932820/2ac2bafd-404d-4ab1-8cab-d0ea000ab0b0)
 ```python
-### map the ground truth cell type labels to the tSNE plot
+## map the ground truth cell type labels to the tSNE plot
 sc.pl.tsne(adata, color=['Cell_type'])
 ```
 ![Figure_3](https://github.com/WangX-Lab/scPathClus/assets/54932820/d3f2592d-592b-49ed-9051-719fc677db32)
 ```python
-### Annotate Cell types using cell marker genes
+## Annotate Cell types using cell marker genes
 marker_genes_dict = {'ductal cell 1': ['AMBP', 'CFTR', 'MMP7'],
                      'ductal cell 2': ['KRT19', 'KRT7', 'TSPAN8', 'SLPI'],
                      'ancinar': ['PRSS1', 'CTRB1','CTRB2','REG1B'],
