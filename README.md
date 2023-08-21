@@ -191,7 +191,8 @@ sc.pl.tsne(adata, color=['leiden_pathway'])
 ```
 ![Figure_6](https://github.com/WangX-Lab/scPathClus/assets/54932820/70820e57-be07-4755-af34-2bace199ab65)
 
-
+# Contact
+E-mail any questions to Hongjing Ai hongjingai@stu.cpu.edu.cn, Xiaosheng Wang xiaosheng.wang@cpu.edu.cn
 
 
 
