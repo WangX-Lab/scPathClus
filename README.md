@@ -68,13 +68,15 @@ os.chdir('/working_path')
 os.getcwd() # Check the working path
 
 pathway_score = pd.read_csv("sc_PathwayScore_example.csv",index_col = 0)
+```
 - pathway_score：
 
   |                       | GOBP_MITOCHONDRIAL_GENOME_MAINTENANCE_UCell | GOBP_REPRODUCTION_UCell |
   | --------------------- | ------------- |--------------------- |
   | T12_ACACCCTTCCGTCATC  | 0.0911209677419355 | 0.412496516257465 |
   | T11_GATCAGTGTGCAACTT  | 0.0631693548387097  | 0.432461181154612 |
-
+  
+```python
 pathway_score.shape  
 sample_names = pathway_score.index
 pathway_score = pathway_score.astype('float32') 
