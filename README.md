@@ -16,7 +16,7 @@ To identify cell subpopulations with pathway heterogeneity, scPathClus requires 
 - os 1.3.1
 # Examples
 This sample data is a random subset (5,000 cells) from PDAC_CRA001160 dataset. 
-## Load dependencies
+### Load dependencies
 ```python
 from keras.layers import Input, Dense
 from keras.models import Model
@@ -30,7 +30,7 @@ import tensorflow as tf
 import scanpy as sc
 import os
 ```
-## Define a class for autoencoder
+### Define a class for autoencoder
 ```python
 class Autoencoder_model:
     def __init__(self,in_dim):
@@ -62,7 +62,7 @@ class Autoencoder_model:
         self.autoencoder = autoencoder
         self.encoder = encoder
 ```
-## Prepare data
+### Prepare data
 ```python
 os.chdir('/working_path')
 os.getcwd() # Check the working path
@@ -80,12 +80,12 @@ pathway_score = minmax_scale(pathway_score)
   | T11_GATCAGTGTGCAACTT  | 0.0631693548387097  | 0.432461181154612 |
 - Converting the data type from  float 64 to float 32 helps speed up the computation.
 - Before performing the dimension reduction step, data should be normalized to 0-1. 
-## Instantiate an autoencoder model
+### Instantiate an autoencoder model
 ```python
 ae_ = Autoencoder_model(in_dim=pathway_score.shape[1]) 
 ae_.aeBuild()
 ```
-## Dimension reduction
+### Dimension reduction
 ```python
 epochs = 50 # Set the number of epochs
 batch_size = 64 # Set the number of batch_size
@@ -102,7 +102,7 @@ autoencoder_fit = ae_.autoencoder.fit(
 )
 ```
 ```python
-## plot the loss curve
+### plot the loss curve
 loss_values = autoencoder_fit.history["loss"] 
 epochs  = list(range(1, 51))
 epoch_loss = pd.DataFrame({'epoch': epoch, 'loss': ae_loss})
@@ -117,7 +117,7 @@ plt.show()
 ![Figure_1](https://github.com/WangX-Lab/scPathClus/assets/54932820/7401ce64-0089-444c-8a2d-e86c59ee6719)
 - Or you can check the loss in real time by using tensorBoard in the callbacks function. 
 ```python
-## Use the model to generate low dimensional features
+### Use the model to generate low dimensional features
 encoded_path = ae_.encoder.predict(pathway_score)
 col_names = ["Feature" + str(ii + 1) for ii in range(64)] 
 encoded_feature = pd.DataFrame(data=encoded_path, columns=col_names, index= sample_names)
@@ -129,7 +129,7 @@ encoded_feature.to_csv("encoded_feature.csv")
   | T11_GATCAGTGTGCAACTT  | 0 | 0 | 0 | 0.09860481 | 0.90391874 |
   | T19_ACGATACGTTGTCGCG  | 0 | 0 | 0 | 8.977797 | 1.0264478 |
 
-## Use scanpy to perform pathway-based clustering
+### Use scanpy to perform pathway-based clustering
 ```python
 adata = sc.read_h5ad("sc_data_example.h5ad")
 adata.obs.shape # (5000, 7)
@@ -148,22 +148,22 @@ sc.tl.tsne(adata,use_rep = "X_pathway")
 sc.tl.leiden(adata,resolution=1)
 ```
 ```python
-## plot the clustering result
+### plot the clustering result
 sc.pl.tsne(adata, color=['leiden'],legend_loc='on data')
 ```
 ![Figure_2](https://github.com/WangX-Lab/scPathClus/assets/54932820/7b9e9f98-dfde-4f28-880d-344122cab6b9)
 ```python
-## map the patient information to the tSNE plot
+### map the patient information to the tSNE plot
 sc.pl.tsne(adata, color=['Patient'])
 ```
 ![Figure_4](https://github.com/WangX-Lab/scPathClus/assets/54932820/2ac2bafd-404d-4ab1-8cab-d0ea000ab0b0)
 ```python
-## map the ground truth cell type labels to the tSNE plot
+### map the ground truth cell type labels to the tSNE plot
 sc.pl.tsne(adata, color=['Cell_type'])
 ```
 ![Figure_3](https://github.com/WangX-Lab/scPathClus/assets/54932820/d3f2592d-592b-49ed-9051-719fc677db32)
 ```python
-## Annotate Cell types using cell marker genes
+### Annotate Cell types using cell marker genes
 marker_genes_dict = {'ductal cell 1': ['AMBP', 'CFTR', 'MMP7'],
                      'ductal cell 2': ['KRT19', 'KRT7', 'TSPAN8', 'SLPI'],
                      'ancinar': ['PRSS1', 'CTRB1','CTRB2','REG1B'],
