@@ -1,6 +1,7 @@
 # scPathClus
 A pathway-based clustering method for single cells.
-![figure1](https://github.com/WangX-Lab/scPathClus/assets/54932820/3c7954ca-9ee6-4440-85b4-948eaa62dbd8)
+![figure11](https://github.com/WangX-Lab/scPathClus/assets/54932820/1550a39d-73a8-42d0-9dd3-0b0aff0a7593)
+
 # Description
 To identify cell subpopulations with pathway heterogeneity, scPathClus requires a single-cell pathway enrichment score matrix. First, an autoencoder is used to obtain the low-dimensional pathway features. Then, the low-dimensional feature matrix is embedded into scanpy to perform pathway-based clustering. 
 # Prerequisites
