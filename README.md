@@ -31,7 +31,7 @@ This sample data is a single-cell RNA expression matrix (18,008 genes x 5,000 ce
 setwd("/working_path")
 library(UCell)
 u.scores <- ScoreSignatures_UCell(exp.mat, features = pathway_list,maxRank=2000)
-write.csv(u.scores, "scPAAD_ucell_score.csv",row.names = T)
+write.csv(u.scores, "sc_PathwayScore_example.csv",row.names = T)
 ```
 ### Load dependencies
 ```python
