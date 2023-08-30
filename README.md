@@ -1,4 +1,4 @@
-![image](https://github.com/WangX-Lab/scPathClus/assets/54932820/f50cbd8c-b35e-48a1-8daa-6fc831fdf646)# scPathClus
+# scPathClus
 A pathway-based clustering method for single cells.
 ![image](https://github.com/WangX-Lab/scPathClus/assets/54932820/25164681-65aa-460e-a11a-0454347e6767)
 
@@ -136,8 +136,7 @@ plt.ylabel('MSE loss')
 plt.grid(True)
 plt.show()
 ```
-![image](https://github.com/WangX-Lab/scPathClus/assets/54932820/a5bc3b0b-e2ec-4609-bb57-542c912f6913)
-
+![image](https://github.com/WangX-Lab/scPathClus/assets/54932820/656073fe-68ee-4d90-a5ac-c38b3aba0b30)
 - Or you can check the loss in real time by using tensorBoard in the callbacks function. 
 ```python
 ### Use the model to generate low dimensional latent features
