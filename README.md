@@ -3,7 +3,7 @@ A pathway-based clustering method for single cells.
 ![image](https://github.com/WangX-Lab/scPathClus/assets/54932820/25164681-65aa-460e-a11a-0454347e6767)
 
 # Description
-With the input of single-cell RNA sequencing data, scPathClus first uses [UCell](https://github.com/carmonalab/UCell) to transform a expression matrix into a single-cell pathway enrichment matrix. Then, an autoencoder is used to obtain the low-dimensional pathway latent feature matrix. Next, the latent feature matrix is embedded into scanpy to perform single-cell clustering. 
+With the input of single-cell RNA sequencing data, scPathClus first uses [UCell](https://github.com/carmonalab/UCell) to transform the expression matrix into a single-cell pathway enrichment matrix. Then, an autoencoder is used to obtain the low-dimensional pathway latent feature matrix. Next, the latent feature matrix is embedded into scanpy to perform single-cell clustering. 
 # Prerequisites
 R:
 - UCell 2.2.0
