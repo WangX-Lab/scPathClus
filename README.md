@@ -1,4 +1,4 @@
-# scPathClus
+![image](https://github.com/WangX-Lab/scPathClus/assets/54932820/f50cbd8c-b35e-48a1-8daa-6fc831fdf646)# scPathClus
 A pathway-based clustering method for single cells.
 ![image](https://github.com/WangX-Lab/scPathClus/assets/54932820/25164681-65aa-460e-a11a-0454347e6767)
 
@@ -136,7 +136,8 @@ plt.ylabel('MSE loss')
 plt.grid(True)
 plt.show()
 ```
-![Figure_1](https://github.com/WangX-Lab/scPathClus/assets/54932820/7401ce64-0089-444c-8a2d-e86c59ee6719)
+![image](https://github.com/WangX-Lab/scPathClus/assets/54932820/a5bc3b0b-e2ec-4609-bb57-542c912f6913)
+
 - Or you can check the loss in real time by using tensorBoard in the callbacks function. 
 ```python
 ### Use the model to generate low dimensional latent features
@@ -153,6 +154,9 @@ encoded_feature.to_csv("encoded_feature.csv")
   | T19_ACGATACGTTGTCGCG  | 0 | 0 | 0 | 8.977797 | 1.0264478 |
 
 ### Use scanpy to perform single-cell clustering
++ input:
+(1) single-cell RNA sequencing data in the form of "anndata"
+(2) a latent feature matrix 
 ```python
 adata = sc.read_h5ad("sc_data_example.h5ad")
 adata.obs.shape # (5000, 7)
@@ -164,7 +168,7 @@ adata.raw = adata
 
 encoded_feature = encoded_feature.reindex(adata.obs.index)
 encoded_feature = encoded_feature.values
-adata.obsm["X_pathway"] = encoded_feature ## Add the matrix of encoded features into adata 
+adata.obsm["X_pathway"] = encoded_feature ## Add the matrix of latent features into adata 
 
 sc.pp.neighbors(adata, n_neighbors=15, use_rep = "X_pathway") 
 sc.tl.tsne(adata,use_rep = "X_pathway")
