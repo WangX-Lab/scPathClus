@@ -132,7 +132,7 @@ epoch_loss = pd.DataFrame({'epoch': epoch, 'loss': ae_loss})
 plt.plot(epochs, loss_values, 'b', marker='o', linestyle='-')
 plt.title('Loss curve')
 plt.xlabel('Epochs')
-plt.ylabel('Loss')
+plt.ylabel('MSE loss')
 plt.grid(True)
 plt.show()
 ```
