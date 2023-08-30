@@ -27,6 +27,7 @@ This sample data is a single-cell RNA expression matrix (18,008 genes x 5,000 ce
 + output: pathway enrichment matrix (5000 cells x 13259 pathways)
 ```R
 ## R
+setwd("/working_path")
 library(UCell)
 u.scores <- ScoreSignatures_UCell(exp.mat, features = pathway_list,maxRank=2000)
 write.csv(u.scores, "scPAAD_ucell_score.csv",row.names = T)
