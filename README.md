@@ -21,8 +21,7 @@ Python:
 # Examples
 This sample data is a single-cell RNA expression matrix (18,008 genes x 5,000 cells) from PDAC_CRA001160 dataset. 
 ### Transform single-cell gene expression matrix into pathway enrichment matrix
-+ input: (1) single-cell gene expression matrix (18,008 genes x 5,000 cells)
-  
++ input: (1) single-cell gene expression matrix (18,008 genes x 5,000 cells) <br>
          (2) pathway list (13259 pathways)
 + output: pathway enrichment matrix (5000 cells x 13259 pathways)
 ```R
