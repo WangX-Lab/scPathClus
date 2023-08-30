@@ -154,8 +154,8 @@ encoded_feature.to_csv("encoded_feature.csv")
   | T19_ACGATACGTTGTCGCG  | 0 | 0 | 0 | 8.977797 | 1.0264478 |
 
 ### Use scanpy to perform single-cell clustering
-+ input:
-(1) single-cell RNA sequencing data in the form of "anndata"
++ input:<br>
+(1) single-cell RNA sequencing data in the form of "anndata"<br>
 (2) a latent feature matrix 
 ```python
 adata = sc.read_h5ad("sc_data_example.h5ad")
