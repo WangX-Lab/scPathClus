@@ -1,11 +1,13 @@
 # scPathClus
 A pathway-based clustering method for single cells.
-![figure11](https://github.com/WangX-Lab/scPathClus/assets/54932820/1550a39d-73a8-42d0-9dd3-0b0aff0a7593)
+![image](https://github.com/WangX-Lab/scPathClus/assets/54932820/25164681-65aa-460e-a11a-0454347e6767)
 
 # Description
-To identify cell subpopulations with pathway heterogeneity, scPathClus requires a single-cell pathway enrichment score matrix. First, an autoencoder is used to obtain the low-dimensional pathway features. Then, the low-dimensional feature matrix is embedded into scanpy to perform pathway-based clustering. 
+with the input of single-cell RNA sequencing data, scPathClus first uses [UCell](https://github.com/carmonalab/UCell) to transform expression matrix into single-cell pathway enrichment matrix. Then, an autoencoder is used to obtain the low-dimensional pathway latent feature matrix. Next, the latent feature matrix is embedded into scanpy to perform single-cell clustering. 
 # Prerequisites
-- Python 3.9
+R:
+- UCell 2.2.0
+Python:
 - pandas 1.5.3
 - scanpy 1.7.2
 - scikit-learn 1.2.1
@@ -16,9 +18,20 @@ To identify cell subpopulations with pathway heterogeneity, scPathClus requires 
 - matplotlib 3.3.2
 - os 1.3.1
 # Examples
-This sample data is a random subset (5,000 cells) from PDAC_CRA001160 dataset. 
+This sample data is a single-cell RNA expression matrix (18,008 genes x 5,000 cells) from PDAC_CRA001160 dataset. 
+### Transform single-cell gene expression matrix into pathway enrichment matrix
++ input: (1) single-cell gene expression matrix (18,008 genes x 5,000 cells)
+         (2) pathway list (13259 pathways)
++ output: pathway enrichment matrix (5000 cells x 13259 pathways)
+```R
+## R
+library(UCell)
+u.scores <- ScoreSignatures_UCell(exp.mat, features = pathway_list,maxRank=2000)
+write.csv(u.scores, "scPAAD_ucell_score.csv",row.names = T)
+```
 ### Load dependencies
 ```python
+## python
 from keras.layers import Input, Dense
 from keras.models import Model
 from keras.optimizers import Adam
@@ -63,14 +76,14 @@ class Autoencoder_model:
         self.autoencoder = autoencoder
         self.encoder = encoder
 ```
-### Prepare data
+### Load single-cell pathway enrichment matrix
 ```python
 os.chdir('/working_path')
 os.getcwd() # Check the working path
 
 pathway_score = pd.read_csv("sc_PathwayScore_example.csv",index_col = 0)
 ```
-- pathway_score：
+- A brief example of pathway enrichment matrix：
 
   |                       | GOBP_MITOCHONDRIAL_GENOME_MAINTENANCE_UCell | GOBP_REPRODUCTION_UCell |
   | --------------------- | ------------- |--------------------- |
@@ -122,19 +135,20 @@ plt.show()
 ![Figure_1](https://github.com/WangX-Lab/scPathClus/assets/54932820/7401ce64-0089-444c-8a2d-e86c59ee6719)
 - Or you can check the loss in real time by using tensorBoard in the callbacks function. 
 ```python
-### Use the model to generate low dimensional features
+### Use the model to generate low dimensional latent features
 encoded_path = ae_.encoder.predict(pathway_score)
 col_names = ["Feature" + str(ii + 1) for ii in range(64)] 
 encoded_feature = pd.DataFrame(data=encoded_path, columns=col_names, index= sample_names)
 encoded_feature.to_csv("encoded_feature.csv")
 ```
+- A brief example of latent feature matrix：
   |                       | Feature1 | Feature2 |Feature3 | Feature4 |Feature5 |
   | --------------------- | ------------- |----------------- |------------- |------------- |--------------- |
   | T12_ACACCCTTCCGTCATC  | 0 | 0 | 0 | 10.317576 | 0.6895857 |
   | T11_GATCAGTGTGCAACTT  | 0 | 0 | 0 | 0.09860481 | 0.90391874 |
   | T19_ACGATACGTTGTCGCG  | 0 | 0 | 0 | 8.977797 | 1.0264478 |
 
-### Use scanpy to perform pathway-based clustering
+### Use scanpy to perform single-cell clustering
 ```python
 adata = sc.read_h5ad("sc_data_example.h5ad")
 adata.obs.shape # (5000, 7)
@@ -193,7 +207,7 @@ sc.pl.tsne(adata, color=['leiden_pathway'])
 ![Figure_6](https://github.com/WangX-Lab/scPathClus/assets/54932820/70820e57-be07-4755-af34-2bace199ab65)
 
 # Contact
-E-mail any questions to Hongjing Ai hongjingai@stu.cpu.edu.cn, Xiaosheng Wang xiaosheng.wang@cpu.edu.cn
+E-mail any questions to Hongjing Ai hongjingai@stu.cpu.edu.cn or Xiaosheng Wang xiaosheng.wang@cpu.edu.cn
 
 
 
