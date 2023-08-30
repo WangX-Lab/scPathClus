@@ -136,7 +136,8 @@ plt.ylabel('MSE loss')
 plt.grid(True)
 plt.show()
 ```
-![image](https://github.com/WangX-Lab/scPathClus/assets/54932820/656073fe-68ee-4d90-a5ac-c38b3aba0b30)
+![image](https://github.com/WangX-Lab/scPathClus/assets/54932820/002948d6-cdf0-4e88-8776-86d1f1b8baa6)
+
 - Or you can check the loss in real time by using tensorBoard in the callbacks function. 
 ```python
 ### Use the model to generate low dimensional latent features
