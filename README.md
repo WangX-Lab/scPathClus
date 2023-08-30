@@ -21,6 +21,7 @@ Python:
 # Examples
 This sample data is a single-cell RNA expression matrix (18,008 genes x 5,000 cells) from PDAC_CRA001160 dataset. 
 ### Transform single-cell gene expression matrix into pathway enrichment matrix
++ Using R package "UCell" to perform pathway enrichment analysis.
 + input:<br>
 (1) a single-cell gene expression matrix (18,008 genes x 5,000 cells) ``exp.mat`` <br>
 (2) a pathway list (13259 pathways) ``pathway_list``
