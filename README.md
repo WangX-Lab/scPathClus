@@ -7,6 +7,7 @@ with the input of single-cell RNA sequencing data, scPathClus first uses [UCell]
 # Prerequisites
 R:
 - UCell 2.2.0
+  
 Python:
 - pandas 1.5.3
 - scanpy 1.7.2
