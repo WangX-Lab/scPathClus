@@ -102,7 +102,7 @@ pathway_score = minmax_scale(pathway_score)
 ```
 - Converting the data type from  float 64 to float 32 helps speed up the computation.
 - Before performing the dimension reduction step, data should be normalized to 0-1. 
-### Instantiate an autoencoder model
+## Create an instance of Autoencoder_model
 ```python
 ae_ = Autoencoder_model(in_dim=pathway_score.shape[1]) 
 ae_.aeBuild()
