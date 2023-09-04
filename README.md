@@ -127,7 +127,7 @@ autoencoder_fit = ae_.autoencoder.fit(
 ### plot the loss curve
 loss_values = autoencoder_fit.history["loss"] 
 epochs  = list(range(1, 51))
-epoch_loss = pd.DataFrame({'epoch': epoch, 'loss': ae_loss})
+epoch_loss = pd.DataFrame({'epoch': epochs, 'loss': loss_values})
 
 plt.plot(epochs, loss_values, 'b', marker='o', linestyle='-')
 plt.title('Loss curve')
